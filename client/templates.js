@@ -31,23 +31,23 @@ Template.UniCalendar.rendered = function () {
     var firstNode = this.firstNode;
     /* @see http://fullcalendar.io/docs/selection/select_callback/ */
     fcConfig.select = function (start, end, jsEvent, view) {
-        $(jsEvent && jsEvent.target || firstNode).trigger('fc-select', arguments);
+        $(jsEvent && jsEvent.target || firstNode).trigger('fc.select', arguments);
     };
     /* @see http://fullcalendar.io/docs/selection/unselect_callback/ */
     fcConfig.unselect = function (view, jsEvent) {
-        $(jsEvent && jsEvent.target || firstNode).trigger('fc-unselect', arguments);
+        $(jsEvent && jsEvent.target || firstNode).trigger('fc.unselect', arguments);
     };
     /* @see http://fullcalendar.io/docs/mouse/dayClick/ */
     fcConfig.dayClick = function (date, jsEvent, view) {
-        $(jsEvent && jsEvent.target || firstNode).trigger('fc-dayclick', arguments);
+        $(jsEvent && jsEvent.target || firstNode).trigger('fc.dayClick', arguments);
     };
     /* @see http://fullcalendar.io/docs/mouse/eventClick/ */
     fcConfig.eventClick = function (event, jsEvent, view) {
-        $(jsEvent && jsEvent.target || firstNode).trigger('fc-eventclick', arguments);
+        $(jsEvent && jsEvent.target || firstNode).trigger('fc.eventClick', arguments);
     };
 
     // init the FullCalendar
-    var fc = $(firstNode).fullCalendar(fcConfig);
+    var fc = this.fc = $(firstNode).fullCalendar(fcConfig);
 
     // make calendar reactive - refetch events when something changes in minimongo
     var refreshCalendar = function () {
