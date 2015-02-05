@@ -12,12 +12,14 @@ Template.UniCalendar.rendered = function () {
             right: 'month,agendaWeek,agendaDay prev,next',
             left: 'title'
         },
+        timezone: 'local',
         allDaySlot: false,
         selectable: true
     });
 
     // get all event sources
-    fcConfig.eventSources = [].concat(fcConfig.eventSources || [], this.data.eventSources || []);
+    //fcConfig.eventSources = [].concat(fcConfig.eventSources || [], this.data.eventSources || []);
+    fcConfig.eventSources = fcConfig.eventSources ? fcConfig.eventSources : this.data.eventSources || [];
 
     // add every collection from event sources to observed collections
     // observed collections will refresh calendar when there is a change in minimongo
