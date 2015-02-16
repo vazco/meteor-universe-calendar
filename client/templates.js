@@ -7,19 +7,20 @@ Template.UniCalendar.rendered = function () {
     var self = this;
 
     // default UniCalendar FullCalendar config
-    var fcConfig = _(this.data.fcConfig || {}).defaults({
+    var fcConfig = _(_.clone(this.data.fcConfig) || {}).defaults({
         header: {
             right: 'month,agendaWeek,agendaDay prev,next',
             left: 'title'
         },
         timezone: 'local',
         allDaySlot: false,
-        selectable: true
+        selectable: true,
+        lazyFetching: false
     });
 
     // get all event sources
-    //fcConfig.eventSources = [].concat(fcConfig.eventSources || [], this.data.eventSources || []);
-    fcConfig.eventSources = fcConfig.eventSources ? fcConfig.eventSources : this.data.eventSources || [];
+    fcConfig.eventSources = [].concat(fcConfig.eventSources || [], this.data.eventSources || []);
+    //fcConfig.eventSources = fcConfig.eventSources ? fcConfig.eventSources : this.data.eventSources || [];
 
     // add every collection from event sources to observed collections
     // observed collections will refresh calendar when there is a change in minimongo
@@ -62,4 +63,10 @@ Template.UniCalendar.rendered = function () {
         refreshCalendar();
     });
 
+};
+
+Template.UniCalendar.destroyed = function () {
+    if (this.fc) {
+        this.fc.fullCalendar('destroy');
+    }
 };
