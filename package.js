@@ -1,7 +1,7 @@
 Package.describe({
     name: 'vazco:universe-calendar',
     summary: 'Universe Calendar Plugin',
-    version: '0.0.3'
+    version: '0.0.4'
 });
 
 Package.onUse(function (api) {
@@ -12,10 +12,9 @@ Package.onUse(function (api) {
         'templating',
         'underscore',
         'jquery',
-        'momentjs:moment',
-        'vazco:tools-common',
-        'vazco:universe-core',
-        'vazco:universe-core-plugin'
+        'momentjs:moment@2.8.4',
+        'vazco:universe-core@1.5.2',
+        'vazco:universe-core-plugin@0.0.3',
     ], ['client', 'server']);
 
     api.addFiles([
